@@ -33,7 +33,7 @@ public class GoodsInCart {
 
 	@Override
 	public String toString() {
-		return "GoodsInCart [goods=" + goods + ", numberOfGoods=" + numberOfGoods + "]";
+		return "购物车中商品信息： [" + goods + ", numberOfGoods=" + numberOfGoods + "]";
 	}
 	
 }
