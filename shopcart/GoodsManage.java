@@ -34,7 +34,6 @@ public class GoodsManage {
 		set.add(phone);
 		set.add(refrigerator);
 		set.add(computer);
-		
 	}
 	
 	/**

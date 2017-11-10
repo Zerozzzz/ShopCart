@@ -51,8 +51,6 @@ public class ShoppingCart {
 		}
 		if(flag){
 			System.out.println("商品编号输入有误，请输入正确的商品编号");
-		}else{
-			this.displayAllInCart();
 		}
 		
 		
@@ -65,32 +63,15 @@ public class ShoppingCart {
 	 * @param numOfGoods
 	 */
 	public void updateNumOfCart(String goodsId,int numOfGoods){
-		boolean exist = false;
-		
 		Set<String> idSet = new HashSet<String>();
 		idSet = cartMap.keySet();
-			
-		for (String u : idSet) {
-			if (goodsId.equals(u)) {
-				exist = true;
-				if(numOfGoods==0){
-//					Map<String,GoodsInCart> map = new HashMap<String,GoodsInCart>();
-					cartMap.remove(goodsId, cartMap.get(goodsId));
-					System.out.println("该商品已经删除！");
-					this.displayAllInCart();
-				}else{
-					GoodsInCart goodsInCart = cartMap.get(goodsId);
-					goodsInCart.setNumberOfGoods(numOfGoods);
-					cartMap.replace(goodsId, goodsInCart);
-				}
+		for(String u:idSet){
+			if(goodsId.equals(u)){
+				GoodsInCart goodsInCart = cartMap.get(goodsId);
+				goodsInCart.setNumberOfGoods(numOfGoods);
+				cartMap.replace(goodsId, goodsInCart);
 			}
 		}
-		
-		if(!exist){
-			System.out.println("该商品不存在，请先加入购物车");	
-		}
-		
-		
 	}
 	
 	/**
@@ -116,9 +97,19 @@ public class ShoppingCart {
 		
 		
 		System.out.println("共需支付："+accounts);
-		cartMap.clear();
-		System.out.println("购物车已清空，快来添加商品吧！");
+		
 	}
 	
-	
+	public static void main(String[] args){
+		ShoppingCart one = new ShoppingCart();
+		GoodsManage gm = new GoodsManage();
+		gm.importGoods();
+		gm.displayAllGoods();
+		one.addGoodsToCart("s01",2);
+		one.addGoodsToCart("s02",2);
+		one.addGoodsToCart("s03",4);
+		one.updateNumOfCart("s01", 3);
+		one.displayAllInCart();
+		one.settleAccounts();
+	}
 }
